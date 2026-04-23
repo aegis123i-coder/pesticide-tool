@@ -60,7 +60,9 @@ if uploaded_file is not None:
                 df_selected.replace('', pd.NA, inplace=True)
                 df_selected.replace(r'^\s*$', pd.NA, regex=True, inplace=True)
                 cols_to_ffill = ["項次", "(農藥項次) 國際普通名稱", "普通名稱", "作物類別"]
-                df_selected[cols_to_ffill] = df_selected[cols_to_ffill].fillna(method='ffill')
+                
+                # === 🌟 修正的地方在這裡：改用 .ffill() ===
+                df_selected[cols_to_ffill] = df_selected[cols_to_ffill].ffill()
                 
                 # 過濾標題列與空白列
                 df_selected = df_selected.dropna(subset=['作物', '修正後容許量(ppm)'])
